@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginStyleSheet.cshtml";
+}
+<div class="interface">
+    <div class="side-background-image">
+        <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/10/5/842222/F4bfd9e1649e82dcfdbe.jpg" alt="background-image" />
+    </div>
+    <div class="container">
+        <div class="login-closebtn" onclick="window.location.href='/home'">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="form-login">
+            <div style="text-align: center">
+                <h2>Sign up</h2>
+            </div>
+            <form id="form" asp-action="Signup" method="POST">
+                <div class="input-login">
+                    <label for="account"> Account </label>
+                    
+                    <i class="fas fa-exclamation-circle"></i>
+                   
+                    <div class="input-group">
+                        <input type="text" name="account" id="account" value="" />
+                    </div>
+              
+                    <div class="error">
+                        <small>  </small>
+                    </div>
+                    
+                    <small> Error message </small>
+                   
+                </div>
+                <div class="input-login">
+                    <label for="account"> Email </label>
+                    
+                    <i class="fas fa-exclamation-circle"></i>
+                    
+                    <div class="input-group">
+                        <input type="text" name="email" id="email" value="" />
+                    </div>
+                    
+                    <div class="error">
+                        <small> <%= error_email %> </small>
+                    </div>
+                   
+                    <small> Error message </small>
+                   
+                </div>
+                <div class="input-login">
+                    <label for="password"> Password </label>
+                   
+                    <i class="fas fa-exclamation-circle"></i>
+                   
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" value="" />
+                        <div class="eye">
+                            <i id="close_password" onclick="PasswordVisualize('password')" class="fa-regular fa-eye-slash"></i>
+                        </div>
+                    </div>
+                
+                    <div class="error">
+                        <small>  </small>
+                    </div>
+              
+                    <small> Error message </small>
+           
+                </div>
+                <div class="input-login">
+                    <label for="rpassword">Confirm Password </label>
+                 
+                    <i class="fas fa-exclamation-circle"></i>
+                   
+                    <div class="input-group">
+                        <input type="password" name="rpassword" id="rpassword" value="<%= rpassword %>" />
+                        <div class="eye">
+                            <i id="close_rpassword" onclick="PasswordVisualize('rpassword')" class="fa-regular fa-eye-slash"></i>
+                        </div>
+                    </div>
+                   
+                    <div class="error">
+                        <small> <%= error_rpassword %> </small>
+                    </div>
+                 
+                    <small> Error message </small>
+                    
+                </div>
+                <div class="submit-btn">
+                    <input type="submit" value="Finish" />
+                </div>
+                <div class="signup-login">
+                    <span><a href="/login">Already have an account ?</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

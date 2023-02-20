@@ -1,0 +1,153 @@
+﻿@model Library.Models.DataBook
+@{
+    Layout = "~/Views/Shared/_LibraryStyleSheet.cshtml";
+}
+
+    @*<%- include('../templates/success.ejs') %>*@
+    <div class="success-notification">
+        <div class="message">
+            <i class="fa-solid fa-face-smile-wink"></i>
+            <span> @*<%= message %>*@ </span>
+            <div class="notification-close"> <i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="process"> </div>
+    </div>
+        <div class="user-interface">
+            @*<%- include('../templates/nav-bar.ejs') %>*@
+        <div class="navigation-bar">
+            <div class="logo">
+                <a href="/home">
+                    <p> Libib </p>
+                </a>
+                <a href="/home"> <i class="fa-solid fa-book-open"></i> </a>
+            </div>
+            <ul class="list-option" id="list-option">
+                <a href="/library">
+                   
+                <li class="inactive">
+                    @*<% }%>*@
+                    <i class="fa-solid fa-book"></i>
+                    <p>Library</p>
+                </li>
+                </a>
+                <a href="/my-collection">
+                   @* <% if(session.page=="my-collection"){ %>*@
+                
+                <li class="inactive">
+                    @*<% }%>*@
+                    <i class="fa-solid fa-book"></i>
+                    <p> My Collection </p>
+                </li>
+                </a>
+                @*<%if(session.perm[0].manage_book){%>*@
+                <a href="/add-book">
+                    @*<% if(session.page=="Add book") %>*@
+               
+                    @*<% }else { %>*@
+                <li class="inactive">
+                    @*<% }%>*@
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <p>Add books</p>
+                </li>
+                </a>
+                @*<%}%>*@
+                <a href="/leaderboard/@*<%= Math.min(session.total,10)%>*@">
+                   @* <% if(session.page=="Leaderboard"){ %>*@
+                
+                    @*<% }else { %>*@
+                <li class="inactive">
+                    @*<% }%>*@
+                    <i class="fa-solid fa-trophy"></i>
+                    <p> Leaderboard</p>
+                </li>
+                </a>
+                <a href="/setting">
+                    @*<% if(session.page=="Setting"){ %>*@
+                
+                    @*<% }else { %>*@
+                <li class="inactive">
+                    @*<% }%>*@
+                    <i class="fa-solid fa-gear"></i>
+                    <p> Settings</p>
+                </li>
+                </a>
+                <a href="/support">
+                    @*<% if(session.page=="Support"){ %>*@
+                
+                    @*<% }else { %>*@
+                <li class="inactive">
+                    @*<% }%>*@
+                    <i class="fa-brands fa-rocketchat"></i>
+                    <p> Support</p>
+                </li>
+                </a>
+                <a href="/logout">
+                <li class="inactive">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <p>Logout</p>
+                </li>
+                </a>
+            </ul>
+            <div class="nav-spacer"> </div>
+            <div class="list-menu">
+                <ul class="list-sci">
+                    <li>
+                        <a href="#" class="fa-brands fa-instagram"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fa-brands fa-twitter"></a>
+                    </li>
+                    <li>
+                        <a href="#" class="fa-brands fa-youtube"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+                <div class="container">
+                    @*<%- include('../templates/header-search.ejs') %>
+                        <%- include('../templates/book-show.ejs') %>*@
+                    <div class="library-bar">
+                        <div class="library-header">
+                            <div class="library-title"> <h1>@*<%= session.page %>*@</h1> </div>
+                            <a class="user-profile me-auto" href="/profile/<%=session.user_id%>">
+                                <div class="user-box">
+                                    <i class="fa-solid fa-circle-user"></i>
+                                    <div class="username">
+                                       @* <%= session.profile[0].account%>*@
+                                       acc
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                <div class="book-show">
+                    @foreach(var item in Model.bookletter)
+                    {
+                        <div class="first-letter" id="<%= item %>">
+                            @item
+                        </div>
+                        <div class="list-book">
+                        @for(var i=0;i<Model.total;i++)
+                        {
+                           @if(Model.bookdata[i].book_title[0]==item)
+                            {
+                                 <a href="/book/<%=session.Bookdata[i].book_id%>" class="item-cover-book">
+                                    <img src="@Model.url[i]" />
+                                    <div class="book-title"></div>
+                                    <div class="book-author"></div>
+
+                                </a>
+                            }
+                    }
+                </div>
+                    }
+
+                    
+
+                </div>
+
+                </div>
+        </div>
+

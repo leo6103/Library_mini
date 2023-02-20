@@ -1,0 +1,107 @@
+﻿@model Library.Models.DataUser
+@{
+    ViewData["Title"] = "Login Page";
+    Layout = "~/Views/Shared/_LoginStyleSheet.cshtml";
+}
+<div class="interface">
+    <div class="side-background-image">
+        <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/10/5/842222/F4bfd9e1649e82dcfdbe.jpg" alt="background-image">
+    </div>
+    <div class="container">
+        <div class="login-closebtn" onclick="window.location.href='/home'">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="form-login">
+            <div style="text-align:center">
+                <h2>Login</h2>
+            </div>
+          
+           @* <div class="alert-box" id="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            
+            </div>*@
+           
+            <form id="form" action="/login" method="post">
+                <div class="input-login">
+                    <label for="account"> Account </label>
+                    @if (Model != null&&Model.error_account != null)
+                    {
+                        <i class="fas fa-exclamation-circle"></i>
+                    }
+                    <div class="input-group">
+                        <input type="text" asp-for="account" name="account" id="account" value="" />
+                    </div>
+                    @if (Model != null && Model.error_account != null)
+                    {
+                        <div class="error">
+                            <small> @Model.error_account </small>
+                        </div>
+                    }
+                    else
+                    {
+                        <small> Error message </small>
+                    }
+
+                    
+                </div>
+                <div class="input-login">
+                    <label for="password"> Password </label>
+                    @if (Model != null && Model.error_password != null)
+                    {
+                        <i class="fas fa-exclamation-circle"></i>
+                    }
+                   
+                   
+                    <div class="input-group">
+                        <input type="password" asp-for="password" name="password" id="password" value="" />
+                        <div class="eye">
+                            <i id="close_password" onclick="PasswordVisualize('password')" class="fa-regular fa-eye-slash"></i>
+                        </div>
+                    </div>
+
+                    @if (Model != null && Model.error_password != null)
+                    {
+                         <div class="error">
+                                <small> @Model.error_password  </small>
+                        </div>
+                    }
+                    else
+                    {
+                        <small> Error message </small>
+                    }
+
+                  
+                </div>
+                <div class="remember">
+                    <label>
+                        <input type="checkbox" value="IsRememberMe" id="rememberMe"> Remember me
+                    </label>
+                </div>
+                <div class="submit-btn">
+                    <input type="submit" value="Sign in" onclick="isRememberMe()">
+                </div>
+
+                <div class="change-password-login">
+                    <span><a href="/change-password"> Forgot your password?</a></span>
+                </div>
+
+                <div class="signup-login">
+                    <span> Don't have an account? <a href="/login/signup">Sign up</a></span>
+                </div>
+            </form>
+
+            <h3> Login with social media</h3>
+            <ul class="list-sci">
+                <li>
+                    <a href="#" class="fa-brands fa-facebook"></a>
+                </li>
+                <li>
+                    <a href="#" class="fa-brands fa-twitter"></a>
+                </li>
+                <li>
+                    <a href="#" class="fa-brands fa-instagram"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
