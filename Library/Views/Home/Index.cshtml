@@ -1,4 +1,5 @@
-﻿@model Library.Models.DataUser
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor _context_session;
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_HomeStyleSheet.cshtml";
@@ -15,7 +16,7 @@
             <ul>
                 <li> Support </li>
                 <li> Contact Us </li>
-                @if (Model!=null&&Model.user_id!=null)
+                @if (_context_session.HttpContext != null && _context_session.HttpContext.Session.GetString("user_id") != null)
                     {
                      <li><button class="btn" onclick="window.location.href='/Libshow'"> My Library </button> </li>
                     <li> <button class="btn" onclick="window.location.href='/home/logout'"> Logout </button> </li>
@@ -44,6 +45,7 @@
         <div class="container">
             <div class="title">Create & Share Your Collection</div>
             <p class="description">
+                @_context_session.HttpContext.Session.GetInt32("user_id");
                 Our library management service caters to libraries, schools, organizations, and home catalogs. Our online software lets you create multiple collections, catalog books, movies, music, and video games, create tags, leave notes, import/export,
                 share your collections and much more. We offer two different subscription options to best fit your needs. Libib is the best place for cataloging and managing your media available online. Now which version is the best for you?
             </p>

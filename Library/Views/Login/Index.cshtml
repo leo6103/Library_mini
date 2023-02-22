@@ -1,4 +1,5 @@
-﻿@model Library.Models.DataUser
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor _context_session;
 @{
     ViewData["Title"] = "Login Page";
     Layout = "~/Views/Shared/_LoginStyleSheet.cshtml";
@@ -24,17 +25,17 @@
             <form id="form" action="/login" method="post">
                 <div class="input-login">
                     <label for="account"> Account </label>
-                    @if (Model != null&&Model.error_account != null)
+                    @if (_context_session.HttpContext != null && _context_session.HttpContext.Session.GetString("error_account") != null)
                     {
                         <i class="fas fa-exclamation-circle"></i>
                     }
                     <div class="input-group">
-                        <input type="text" asp-for="account" name="account" id="account" value="" />
+                        <input type="text" @*asp-for="account"*@ name="account" id="account" value="" />
                     </div>
-                    @if (Model != null && Model.error_account != null)
+                    @if (_context_session.HttpContext != null && _context_session.HttpContext.Session.GetString("error_account") != null)
                     {
                         <div class="error">
-                            <small> @Model.error_account </small>
+                            <small>@_context_session.HttpContext.Session.GetString("error_account") </small>
                         </div>
                     }
                     else
@@ -46,23 +47,23 @@
                 </div>
                 <div class="input-login">
                     <label for="password"> Password </label>
-                    @if (Model != null && Model.error_password != null)
+                    @if (_context_session.HttpContext != null && _context_session.HttpContext.Session.GetString("error_password") != null)
                     {
                         <i class="fas fa-exclamation-circle"></i>
                     }
                    
                    
                     <div class="input-group">
-                        <input type="password" asp-for="password" name="password" id="password" value="" />
+                        <input type="password"@* asp-for="password"*@ name="password" id="password" value="" />
                         <div class="eye">
                             <i id="close_password" onclick="PasswordVisualize('password')" class="fa-regular fa-eye-slash"></i>
                         </div>
                     </div>
 
-                    @if (Model != null && Model.error_password != null)
+                    @if (_context_session.HttpContext != null && _context_session.HttpContext.Session.GetString("error_password") != null)
                     {
                          <div class="error">
-                                <small> @Model.error_password  </small>
+                            <small> @_context_session.HttpContext.Session.GetString("error_password") </small>
                         </div>
                     }
                     else

@@ -2,6 +2,7 @@
 using Library.Models;
 using Library.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Library.Controllers
 {
@@ -9,9 +10,11 @@ namespace Library.Controllers
     {
         private readonly LibraryContext _context;
         public DataBook databook = new DataBook();
-        public LibshowController(LibraryContext context)
+        public IHttpContextAccessor _context_session;
+        public LibshowController(LibraryContext context,IHttpContextAccessor context_session)
         {
             _context = context;
+            _context_session = context_session;
         }
         public async Task<IActionResult> Index(DataBook databook)
         {

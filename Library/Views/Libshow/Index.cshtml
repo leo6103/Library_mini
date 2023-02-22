@@ -1,4 +1,7 @@
-﻿@model Library.Models.DataBook
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor _context_session;
+
+@model Library.Models.DataBook
 @{
     Layout = "~/Views/Shared/_LibraryStyleSheet.cshtml";
 }
@@ -115,7 +118,10 @@
                                     <i class="fa-solid fa-circle-user"></i>
                                     <div class="username">
                                        @* <%= session.profile[0].account%>*@
-                                       acc
+                                       
+                                        @_context_session.HttpContext.Session.GetString("acc_name")
+                                        
+                                       
                                     </div>
                                 </div>
                             </a>
