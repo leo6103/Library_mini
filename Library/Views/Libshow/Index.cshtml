@@ -1,9 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using Library.Models;
+@using System.Linq;
 @inject IHttpContextAccessor _context_session;
-
-@model Library.Models.DataBook
 @{
     Layout = "~/Views/Shared/_LibraryStyleSheet.cshtml";
+}
+@{
+
+    List<Book> books = JsonConvert.DeserializeObject<List<Book>>(_context_session.HttpContext.Session.GetString("book"));
+    var total = _context_session.HttpContext.Session.GetInt32("total");
+    List<Char> firstLetter = books.Select(book => book.book_title.First()).Distinct().ToList();
 }
 
     @*<%- include('../templates/success.ejs') %>*@
@@ -33,7 +40,7 @@
                     <p>Library</p>
                 </li>
                 </a>
-                <a href="/my-collection">
+                <a href="/mycollection">
                    @* <% if(session.page=="my-collection"){ %>*@
                 
                 <li class="inactive">
@@ -43,7 +50,7 @@
                 </li>
                 </a>
                 @*<%if(session.perm[0].manage_book){%>*@
-                <a href="/add-book">
+                <a href="/addbook">
                     @*<% if(session.page=="Add book") %>*@
                
                     @*<% }else { %>*@
@@ -129,18 +136,18 @@
                     </div>
 
                 <div class="book-show">
-                    @foreach(var item in Model.bookletter)
+                    @foreach(var item in firstLetter)
                     {
                         <div class="first-letter" id="<%= item %>">
                             @item
                         </div>
                         <div class="list-book">
-                        @for(var i=0;i<Model.total;i++)
+                        @for(var i=0;i<total;i++)
                         {
-                           @if(Model.bookdata[i].book_title[0]==item)
+                           @if(books[i].book_title[0]==item)
                             {
                                  <a href="/book/<%=session.Bookdata[i].book_id%>" class="item-cover-book">
-                                    <img src="@Model.url[i]" />
+                                    <img src="@books[i].cover" />
                                     <div class="book-title"></div>
                                     <div class="book-author"></div>
 

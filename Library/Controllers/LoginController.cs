@@ -21,7 +21,6 @@ namespace Library.Controllers
     {
 
         private readonly LibraryContext _context;
-        public DataUser data_user=new DataUser();
         public IHttpContextAccessor _context_session;
         //constructor
         public LoginController(LibraryContext context, IHttpContextAccessor context_session)
@@ -80,8 +79,8 @@ namespace Library.Controllers
                 user.last_login= DateTime.Now;
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                data_user.user_id = user.user_id;
-                return RedirectToAction("Index","Home",data_user);
+               
+                return RedirectToAction("Index","Home", user.user_id);
             }
             return View();
         }

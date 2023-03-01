@@ -10,3 +10,6 @@ insert into [Books] values
 
 insert into [Books] values
 ('Hardtune of light','0','200','No','Author','Publisher','/img/hardtune.jpg','1')
+
+delete from [Books]
+where book_id>1000
